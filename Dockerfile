@@ -8,12 +8,13 @@
 FROM divio/base:1.2-py3.11-slim-bookworm
 # </DOCKER_FROM>
 
-# <NPM>
-RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /usr/share/keyrings/yarn-archive-keyring.gpg && \
+# Install gpg and Yarn via npm
+RUN apt-get update && \
+    apt-get install -y gnupg && \
+    curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /usr/share/keyrings/yarn-archive-keyring.gpg && \
     echo "deb [signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian stable main" > /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
     apt-get install -y yarn
-# </NPM>
 
 # <BOWER>
 # </BOWER>

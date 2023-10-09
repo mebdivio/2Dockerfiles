@@ -9,6 +9,8 @@ FROM divio/base:1.2-py3.11-slim-bookworm
 # </DOCKER_FROM>
 
 # <NPM>
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs
 # </NPM>
 
 # <BOWER>
@@ -31,6 +33,7 @@ COPY . /app
 # </SOURCE>
 
 # <GULP>
+RUN yarn build dev
 # </GULP>
 
 # <STATIC>

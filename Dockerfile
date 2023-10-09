@@ -8,14 +8,16 @@
 FROM divio/base:1.2-py3.11-slim-bookworm
 # </DOCKER_FROM>
 
-# Install gpg and Yarn via npm
-RUN apt-get update && \
-    apt-get install -y gnupg && \
-    curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /usr/share/keyrings/yarn-archive-keyring.gpg && \
+# Install Node.js and npm
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs
+
+# Install Yarn
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /usr/share/keyrings/yarn-archive-keyring.gpg && \
     echo "deb [signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian stable main" > /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
     apt-get install -y yarn
-
+    
 # <BOWER>
 # </BOWER>
 

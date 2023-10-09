@@ -9,8 +9,8 @@ FROM divio/base:1.2-py3.11-slim-bookworm
 # </DOCKER_FROM>
 
 # <NPM>
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs
+RUN sudo yum install https://rpm.nodesource.com/pub_20.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y && \
+    sudo yum install nodejs -y --setopt=nodesource-nodejs.module_hotfixes=1
 # </NPM>
 
 # <BOWER>
@@ -27,6 +27,9 @@ RUN pip-reqs compile && \
         --no-index --no-deps \
         --requirement requirements.urls
 # </PYTHON>
+
+# Install NPM packages
+RUN npm install
 
 # <SOURCE>
 COPY . /app

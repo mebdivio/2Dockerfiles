@@ -32,6 +32,11 @@ RUN pip-reqs compile && \
         --no-index --no-deps \
         --requirement requirements.urls
 # </PYTHON>
+# Set a working directory for your application
+WORKDIR /app
+
+# Copy the package.json and package-lock.json files to the working directory
+COPY package*.json ./
 
 # Install NPM packages
 RUN npm install
